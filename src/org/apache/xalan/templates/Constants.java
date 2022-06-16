@@ -396,4 +396,11 @@ public class Constants extends org.apache.xml.utils.Constants
   
   /** temp dummy         */
   public static final String ATTRNAME_XXXX = "XXXX";
+  
+  /* HH constants for disabling extensions */
+  public static final String DISABLE_JAVA_EXTENSIONS = "disable-xalan-java";
+  public static final String DISABLE_JAVASCRIPT_EXTENSIONS = "disable-xalan-javascript";
+  public static final String EXTENSIONS_YES = "yes";
+  public static final String EXTENSIONS_NO = "no";
+  
 }

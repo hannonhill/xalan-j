@@ -154,7 +154,10 @@ public class ExtensionNamespacesManager
    */
   public ExtensionNamespaceSupport defineJavaNamespace(String ns)
   {
-    return defineJavaNamespace(ns, ns);
+      //HH: CSCD-5292: Disable java extensions when this property is turned on
+      if(System.getProperty(Constants.DISABLE_JAVA_EXTENSIONS) != null && System.getProperty(Constants.DISABLE_JAVA_EXTENSIONS).equals(Constants.EXTENSIONS_YES))
+          return null;
+      return defineJavaNamespace(ns, ns);
   }
   public ExtensionNamespaceSupport defineJavaNamespace(String ns, String classOrPackage)
   {
@@ -206,49 +209,57 @@ public class ExtensionNamespacesManager
    * Set up a Vector for predefined extension namespaces.
    */
   private void setPredefinedNamespaces()
-  {    
+  { 
     String uri = Constants.S_EXTENSIONS_JAVA_URL;
     String handlerClassName = "org.apache.xalan.extensions.ExtensionHandlerJavaPackage";
     String lang = "javapackage";
     String lib = "";
-    m_predefExtensions.add(new ExtensionNamespaceSupport(uri, handlerClassName,
-                                             new Object[]{uri, lang, lib}));
-   
-    uri = Constants.S_EXTENSIONS_OLD_JAVA_URL;
-    m_predefExtensions.add(new ExtensionNamespaceSupport(uri, handlerClassName,
-                                             new Object[]{uri, lang, lib}));
     
-    uri = Constants.S_EXTENSIONS_LOTUSXSL_JAVA_URL;
-    m_predefExtensions.add(new ExtensionNamespaceSupport(uri, handlerClassName,
-                                             new Object[]{uri, lang, lib}));
-    
-    uri = Constants.S_BUILTIN_EXTENSIONS_URL;
+    //HH: CSCD-5292: Disable java extensions when this property is turned on  
+    if(System.getProperty(Constants.DISABLE_JAVA_EXTENSIONS) == null || System.getProperty(Constants.DISABLE_JAVA_EXTENSIONS).equals(Constants.EXTENSIONS_NO))
+    {        
+        m_predefExtensions.add(new ExtensionNamespaceSupport(uri, handlerClassName,
+                                                 new Object[]{uri, lang, lib}));
+       
+        uri = Constants.S_EXTENSIONS_OLD_JAVA_URL;
+        m_predefExtensions.add(new ExtensionNamespaceSupport(uri, handlerClassName,
+                                                 new Object[]{uri, lang, lib}));
+        
+        uri = Constants.S_EXTENSIONS_LOTUSXSL_JAVA_URL;
+        m_predefExtensions.add(new ExtensionNamespaceSupport(uri, handlerClassName,
+                                                 new Object[]{uri, lang, lib}));
+        
+        uri = Constants.S_BUILTIN_EXTENSIONS_URL;
+        handlerClassName = "org.apache.xalan.extensions.ExtensionHandlerJavaClass";
+        lang = "javaclass"; // for remaining predefined extension namespaces.    
+        lib = "org.apache.xalan.lib.Extensions";
+        m_predefExtensions.add(new ExtensionNamespaceSupport(uri, handlerClassName,
+                                                 new Object[]{uri, lang, lib}));
+        
+        uri = Constants.S_BUILTIN_OLD_EXTENSIONS_URL;
+        m_predefExtensions.add(new ExtensionNamespaceSupport(uri, handlerClassName,
+                                                 new Object[]{uri, lang, lib}));
+        
+        // Xalan extension namespaces (redirect, pipe and SQL).
+        uri = Constants.S_EXTENSIONS_REDIRECT_URL;
+        lib = "org.apache.xalan.lib.Redirect";
+        m_predefExtensions.add(new ExtensionNamespaceSupport(uri, handlerClassName,
+                                                 new Object[]{uri, lang, lib}));
+     
+        uri = Constants.S_EXTENSIONS_PIPE_URL;
+        lib = "org.apache.xalan.lib.PipeDocument";
+        m_predefExtensions.add(new ExtensionNamespaceSupport(uri, handlerClassName,
+                                                 new Object[]{uri, lang, lib}));
+     
+        uri = Constants.S_EXTENSIONS_SQL_URL;
+        lib = "org.apache.xalan.lib.sql.XConnection";
+        m_predefExtensions.add(new ExtensionNamespaceSupport(uri, handlerClassName,
+                                                 new Object[]{uri, lang, lib}));
+    }
+ 
+    // must be set here in case regular Java extensions are disabled
     handlerClassName = "org.apache.xalan.extensions.ExtensionHandlerJavaClass";
     lang = "javaclass"; // for remaining predefined extension namespaces.    
-    lib = "org.apache.xalan.lib.Extensions";
-    m_predefExtensions.add(new ExtensionNamespaceSupport(uri, handlerClassName,
-                                             new Object[]{uri, lang, lib}));
-    
-    uri = Constants.S_BUILTIN_OLD_EXTENSIONS_URL;
-    m_predefExtensions.add(new ExtensionNamespaceSupport(uri, handlerClassName,
-                                             new Object[]{uri, lang, lib}));
-    
-    // Xalan extension namespaces (redirect, pipe and SQL).
-    uri = Constants.S_EXTENSIONS_REDIRECT_URL;
-    lib = "org.apache.xalan.lib.Redirect";
-    m_predefExtensions.add(new ExtensionNamespaceSupport(uri, handlerClassName,
-                                             new Object[]{uri, lang, lib}));
- 
-    uri = Constants.S_EXTENSIONS_PIPE_URL;
-    lib = "org.apache.xalan.lib.PipeDocument";
-    m_predefExtensions.add(new ExtensionNamespaceSupport(uri, handlerClassName,
-                                             new Object[]{uri, lang, lib}));
- 
-    uri = Constants.S_EXTENSIONS_SQL_URL;
-    lib = "org.apache.xalan.lib.sql.XConnection";
-    m_predefExtensions.add(new ExtensionNamespaceSupport(uri, handlerClassName,
-                                             new Object[]{uri, lang, lib}));
- 
     
     //EXSLT namespaces (not including EXSLT function namespaces which are
     // registered by the associated ElemFunction.

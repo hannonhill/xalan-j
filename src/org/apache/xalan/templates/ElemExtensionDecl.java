@@ -28,6 +28,7 @@ import org.apache.xalan.res.XSLMessages;
 import org.apache.xalan.res.XSLTErrorResources;
 import org.apache.xalan.transformer.TransformerImpl;
 import org.apache.xml.utils.StringVector;
+import org.apache.xalan.templates.Constants;
 
 /**
  * Implement the declaration of an extension element 
@@ -236,6 +237,9 @@ public class ElemExtensionDecl extends ElemTemplateElement
         throw new TransformerException(XSLMessages.createMessage(XSLTErrorResources.ER_ELEM_CONTENT_NOT_ALLOWED, new Object[]{scriptSrc})); 
         //"Element content not allowed for lang=javaclass " + scriptSrc);
 
+    // used as a No Op for disabling java and javascript extensions
+    String emptyHandler ="org.apache.xalan.extensions.ExtensionHandlerEmpty";
+    
     // Register the extension namespace if it has not already been registered.
     ExtensionNamespaceSupport extNsSpt = null;
     ExtensionNamespacesManager extNsMgr = sroot.getExtensionNamespacesManager();
@@ -244,7 +248,13 @@ public class ElemExtensionDecl extends ElemTemplateElement
     {
       if (lang.equals("javaclass"))
       {
-        if (null == srcURL)
+          // HH: CSCD-5292: Disable java extensions when this property is set
+        if(System.getProperty(Constants.DISABLE_JAVA_EXTENSIONS) != null 
+                && System.getProperty(Constants.DISABLE_JAVA_EXTENSIONS).equals(Constants.EXTENSIONS_YES)) 
+        {
+            extNsSpt = new ExtensionNamespaceSupport(declNamespace, emptyHandler, new Object[]{"", ""});
+        }
+        else if (null == srcURL)
         {
            extNsSpt = extNsMgr.defineJavaNamespace(declNamespace);
         }
@@ -256,10 +266,19 @@ public class ElemExtensionDecl extends ElemTemplateElement
       }
       else  // not java
       {
-        String handler = "org.apache.xalan.extensions.ExtensionHandlerGeneral";
-        Object [] args = {declNamespace, this.m_elements, this.m_functions,
+          //HH: CSCD-5292: Disable javascript extensions when this property is set
+          if(System.getProperty(Constants.DISABLE_JAVASCRIPT_EXTENSIONS) != null 
+             && System.getProperty(Constants.DISABLE_JAVASCRIPT_EXTENSIONS).equals(Constants.EXTENSIONS_YES)) 
+          {
+              extNsSpt = new ExtensionNamespaceSupport(declNamespace, emptyHandler, new Object[]{"",""});
+          }
+          else 
+          {
+              String handler = "org.apache.xalan.extensions.ExtensionHandlerGeneral";
+              Object [] args = {declNamespace, this.m_elements, this.m_functions,
                           lang, srcURL, scriptSrc, getSystemId()};
-        extNsSpt = new ExtensionNamespaceSupport(declNamespace, handler, args);
+              extNsSpt = new ExtensionNamespaceSupport(declNamespace, handler, args);
+          }
       }
     }
     if (extNsSpt != null)

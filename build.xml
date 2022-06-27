@@ -380,7 +380,6 @@ $Id$
       <exclude name="**/IncrementalSAXSource_Xerces.java" 
         unless="xerces.present"	 />
       <classpath refid="compile.class.path" />
-      <bootclasspath refid="xslt.boot.class.path" />
     </javac>
     <!-- Copy needed properties, resource, etc. files to be put into .jar file -->
     <copy todir="${build.classes}">
@@ -405,7 +404,6 @@ $Id$
       <include name="${xalan.reldir}/**/*.java" />
       <exclude name="${xsltc.reldir}/**/*.java" />
       <classpath refid="compile.class.path" />
-      <bootclasspath refid="xslt.boot.class.path" />
       <sourcepath refid="compile.source.path" />
     </javac>
     <!-- Copy needed properties, resource, etc. files to be put into .jar file -->
@@ -447,10 +445,9 @@ $Id$
            includes="${xsltc.reldir}/util/**/*.java"
            debug="${build.debug}">
       <classpath refid="xsltc.class.path" />
-      <bootclasspath refid="xslt.boot.class.path" />
     </javac>
     <!-- These tricky uptodate statements hopefully determine if we 
-         actually need to generate the java_cup and jlex files 
+         actually need to generate the java_cup and jlex files
          in the two sub-targets below
     -->
     <uptodate property="xsltc.java_cup.not_needed" targetfile="${generated.xpathparser}" >
@@ -476,8 +473,6 @@ $Id$
     <java fork="yes" failonerror="true" 
        classname="org.apache.xalan.xsltc.util.JavaCupRedirect" >
       <classpath refid="xsltc.class.path" />
-      <!-- need to bootclasspath java_cup for JDKs that include JavaCupRedirect -->
-      <jvmarg value="-Xbootclasspath/p:${java_cup.jar}${path.separator}${runtime.jar}"/>
       <!-- We're using JavaCupRedirect to call the java_cup application -->
       <arg line="-parser XPathParser -expect 0 
          -stdin ${src.dir}/${xsltc.reldir}/compiler/xpath.cup"/>
@@ -510,7 +505,6 @@ $Id$
            excludes="${serializer.reldir}/**/*.java"
            debug="${build.debug}"> 
       <classpath refid="xsltc.class.path" />
-      <bootclasspath refid="xslt.boot.class.path" />
     </javac>
   </target>
 
@@ -523,7 +517,6 @@ $Id$
            includes="${xsltc.reldir}/**/*.java"
            debug="${build.debug}">
       <classpath refid="xsltc.class.path" />
-      <bootclasspath refid="xslt.boot.class.path" />
     </javac>
   </target>
 
@@ -722,77 +715,77 @@ $Id$
     <!-- Since the samples are packageless, they must be compiled separately. -->   
     <javac srcdir="${samples.dir}/SimpleTransform" 
            destdir="${build.samples}"  excludes="${exclude}"
-           debug="${build.debug}" bootclasspathref="xslt.boot.class.path" >
+           debug="${build.debug}" >
       <classpath refid="samples.class.path" />
     </javac>           
     <javac srcdir="${samples.dir}/UseStylesheetPI"   
            destdir="${build.samples}"  excludes="${exclude}"
-           debug="${build.debug}" bootclasspathref="xslt.boot.class.path" >
+           debug="${build.debug}" >
       <classpath refid="samples.class.path" />
     </javac>           
     <javac srcdir="${samples.dir}/UseStylesheetParam" 
            destdir="${build.samples}"  excludes="${exclude}"
-           debug="${build.debug}" bootclasspathref="xslt.boot.class.path" >
+           debug="${build.debug}" >
       <classpath refid="samples.class.path" />
     </javac>           
     <javac srcdir="${samples.dir}/SAX2SAX"  
            destdir="${build.samples}"  excludes="${exclude}"
-           debug="${build.debug}" bootclasspathref="xslt.boot.class.path" >
+           debug="${build.debug}" >
       <classpath refid="samples.class.path" />
     </javac>           
     <javac srcdir="${samples.dir}/DOM2DOM"  
            destdir="${build.samples}"  excludes="${exclude}"
-           debug="${build.debug}" bootclasspathref="xslt.boot.class.path" >
+           debug="${build.debug}" >
       <classpath refid="samples.class.path" />
     </javac>           
     <javac srcdir="${samples.dir}/Pipe"  
            destdir="${build.samples}"  excludes="${exclude}"
-           debug="${build.debug}" bootclasspathref="xslt.boot.class.path" >
+           debug="${build.debug}">
       <classpath refid="samples.class.path" />
     </javac>           
     <javac srcdir="${samples.dir}/UseXMLFilters"  
            destdir="${build.samples}"  excludes="${exclude}"
-           debug="${build.debug}" bootclasspathref="xslt.boot.class.path" >
+           debug="${build.debug}"  >
       <classpath refid="samples.class.path" />
     </javac>           
     <javac srcdir="${samples.dir}/Trace"   
            destdir="${build.samples}"  excludes="${exclude}"
-           debug="${build.debug}" bootclasspathref="xslt.boot.class.path" >
+           debug="${build.debug}"  >
       <classpath refid="samples.class.path" />
     </javac>           
     <javac srcdir="${samples.dir}/ApplyXPath"  
            destdir="${build.samples}" excludes="${exclude}" 
-           debug="${build.debug}" bootclasspathref="xslt.boot.class.path" >
+           debug="${build.debug}" >
       <classpath refid="samples.class.path" />
     </javac>
     <javac srcdir="${samples.dir}/ApplyXPathDOM"  
            destdir="${build.samples}" excludes="${exclude}" 
-           debug="${build.debug}" bootclasspathref="xslt.boot.class.path" >
+           debug="${build.debug}"  >
       <classpath refid="samples.class.path" />
     </javac>             
     <javac srcdir="${samples.dir}/trax"  
            destdir="${build.samples}" excludes="${exclude}" 
-           debug="${build.debug}" bootclasspathref="xslt.boot.class.path" >
+           debug="${build.debug}" >
       <classpath refid="samples.class.path" />
     </javac>           
     <javac srcdir="${samples.dir}/extensions"  
            destdir="${build.samples}" excludes="${exclude}" 
-           debug="${build.debug}" bootclasspathref="xslt.boot.class.path" >
+           debug="${build.debug}" >
       <classpath refid="samples.class.path" />
     </javac>           
     <javac srcdir="${samples.dir}/Validate"  
            destdir="${build.samples}" excludes="${exclude}" 
-           debug="${build.debug}" bootclasspathref="xslt.boot.class.path" >
+           debug="${build.debug}">
       <classpath refid="samples.class.path" />
     </javac> 
     <javac srcdir="${samples.dir}/TransformThread"  
            destdir="${build.samples}" excludes="${exclude}" 
-           debug="${build.debug}" bootclasspathref="xslt.boot.class.path" >
+           debug="${build.debug}" >
       <classpath refid="samples.class.path" />
     </javac>
     <javac srcdir="${samples.dir}/XPathAPI"  
            destdir="${build.samples}" excludes="${exclude}" 
-           debug="${build.debug}" bootclasspathref="xslt.boot.class.path" >
+           debug="${build.debug}" >
       <classpath refid="samples.class.path" />
     </javac>               
     <jar jarfile="${build.samples.jar}" basedir="${build.samples}"
@@ -834,7 +827,7 @@ $Id$
      <javac srcdir="${samples.dir}/servlet"
             destdir="${build.servlet}/WEB-INF/classes"
             debug="${build.debug}"
-            bootclasspathref="xslt.boot.class.path" >
+     >
        <classpath refid="samples.class.path" />
      </javac>           
       <copy todir="${build.servlet}/WEB-INF/classes/servlet">
@@ -874,10 +867,10 @@ $Id$
     <javac srcdir="${samples.dir}/translets"
            classpath="${java.class.path}:${build.xalan.jar}" 
            destdir="${build.samples}" excludes="${exclude}" 
-           debug="${build.debug}" bootclasspathref="xslt.boot.class.path" />
+           debug="${build.debug}"/>
     <javac srcdir="${samples.dir}/CompiledJAXP"
            destdir="${build.samples}" excludes="${exclude}"
-           debug="${build.debug}" bootclasspathref="xslt.boot.class.path" />
+           debug="${build.debug}" />
   </target>
 
   <!-- =================================================================== -->
@@ -889,7 +882,7 @@ $Id$
     <mkdir dir="${build.samples}/CompiledApplet"/>
     <javac srcdir="${samples.dir}/CompiledApplet"
            destdir="${build.samples}/CompiledApplet" excludes="${exclude}"
-           debug="${build.debug}" bootclasspathref="xslt.boot.class.path" />
+           debug="${build.debug}" />
     <jar jarfile="${build.xsltc.applet.jar}"
          basedir="${build.samples}/CompiledApplet"
          includes="*.class"/>
@@ -904,7 +897,7 @@ $Id$
     <mkdir dir="${build.samples}/CompiledBrazil"/>
     <javac srcdir="${samples.dir}/CompiledBrazil"
            destdir="${build.samples}/CompiledBrazil" excludes="${exclude}"
-           debug="${build.debug}" bootclasspathref="xslt.boot.class.path" />
+           debug="${build.debug}"/>
     <jar jarfile="${build.xsltc.brazil.jar}"
          basedir="${build.samples}/CompiledBrazil"
          includes="*.class"/>
@@ -921,7 +914,7 @@ $Id$
     <mkdir dir="${build.samples}/CompiledEJB"/>
     <javac srcdir="${samples.dir}/CompiledEJB"
            destdir="${build.samples}/CompiledEJB" excludes="${exclude}"
-           debug="${build.debug}" bootclasspathref="xslt.boot.class.path" />
+           debug="${build.debug}" />
     <jar jarfile="${build.xsltc.ejb.jar}"
          basedir="${build.samples}/CompiledEJB"
          includes="*.class"/>
@@ -936,7 +929,7 @@ $Id$
     <mkdir dir="${build.samples}/CompiledServlet"/>
     <javac srcdir="${samples.dir}/CompiledServlet"
            destdir="${build.samples}/CompiledServlet" excludes="${exclude}"
-           debug="${build.debug}" bootclasspathref="xslt.boot.class.path" />
+           debug="${build.debug}" />
     <jar jarfile="${build.xsltc.servlet.jar}"
          basedir="${build.samples}/CompiledServlet"
          includes="*.class"/>
@@ -1644,7 +1637,6 @@ $Id$
            debug="${serializer.build.debug}" >
       <include name="${serializer.reldir}/**/*.java" />
       <classpath refid="compile.class.path" />
-      <bootclasspath refid="xslt.boot.class.path" />
     </javac>
     <!-- Copy needed properties, resource, etc. files to be put into .jar file -->
     <copy todir="${serializer.build.classes}">

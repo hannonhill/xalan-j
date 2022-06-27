@@ -5,9 +5,48 @@
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/samples" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+      <excludeFolder url="file://$MODULE_DIR$/samples/ApplyXPath" />
+      <excludeFolder url="file://$MODULE_DIR$/samples/ApplyXPathDOM" />
+      <excludeFolder url="file://$MODULE_DIR$/samples/CompiledApplet" />
+      <excludeFolder url="file://$MODULE_DIR$/samples/CompiledBrazil" />
+      <excludeFolder url="file://$MODULE_DIR$/samples/CompiledEJB" />
+      <excludeFolder url="file://$MODULE_DIR$/samples/CompiledJAXP" />
+      <excludeFolder url="file://$MODULE_DIR$/samples/CompiledServlet" />
+      <excludeFolder url="file://$MODULE_DIR$/samples/DOM2DOM" />
+      <excludeFolder url="file://$MODULE_DIR$/samples/extensions" />
+      <excludeFolder url="file://$MODULE_DIR$/samples/Pipe" />
+      <excludeFolder url="file://$MODULE_DIR$/samples/SAX2SAX" />
+      <excludeFolder url="file://$MODULE_DIR$/samples/SimpleTransform" />
+      <excludeFolder url="file://$MODULE_DIR$/samples/Trace" />
+      <excludeFolder url="file://$MODULE_DIR$/samples/TransformThread" />
+      <excludeFolder url="file://$MODULE_DIR$/samples/translets" />
+      <excludeFolder url="file://$MODULE_DIR$/samples/trax" />
+      <excludeFolder url="file://$MODULE_DIR$/samples/UseStylesheetParam" />
+      <excludeFolder url="file://$MODULE_DIR$/samples/UseStylesheetPI" />
+      <excludeFolder url="file://$MODULE_DIR$/samples/UseXMLFilters" />
+      <excludeFolder url="file://$MODULE_DIR$/samples/Validate" />
+      <excludeFolder url="file://$MODULE_DIR$/samples/XPathAPI" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="lib" level="project" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/tools/java_cup.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/servlet-api-2.5.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>

@@ -37,6 +37,7 @@
       <sourceFolder url="file://$MODULE_DIR$/extensions" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/translets" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/trax" isTestSource="false" />
+      <excludeFolder url="file://$MODULE_DIR$" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

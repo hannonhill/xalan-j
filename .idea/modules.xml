@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/samples/samples.iml" filepath="$PROJECT_DIR$/samples/samples.iml" />
       <module fileurl="file://$PROJECT_DIR$/xalan-j.iml" filepath="$PROJECT_DIR$/xalan-j.iml" />
     </modules>
   </component>

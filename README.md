@@ -6,7 +6,6 @@ This branch contains the base 2.7.1 version of the Xalan-J project plus customiz
 ### Customizations We Have Made
 - Ability to enable/disable Xalan Javascript and Xalan Java extensions via a system property.  This customization exists for security reasons.
 - Gutted code that cached XMLReader objects in memory (XMLReaderManager.java) as it was leaking memory and would eventually cause OutOfMemory errors.
-- 
 - Applied a patch from [XALANJ-2419](https://issues.apache.org/jira/browse/XALANJ-2419) to address an issue where Unicode characters composed of a surrogate pair were being treated as separate Unicode characters and serialized incorrectly by the serializer package.
 
 #### To Build JARs:
